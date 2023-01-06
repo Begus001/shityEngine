@@ -83,11 +83,24 @@ bool Shader::compile() const
 	return true;
 }
 
-int Shader::getUniform(const char *name) const
+template<>
+void Shader::setUniform<U4F>(const char *name, float f1, float f2, float f3, float f4)
 {
+	GLCALL(glUniform4f(getUniform(name), f1, f2, f3, f4));
+}
+
+int Shader::getUniform(const char *name)
+{
+	if (mUniformMap.contains(name)) {
+		return mUniformMap[name];
+	}
+
 	int uni;
 	GLCALL(uni = glGetUniformLocation(mProgID, "color"));
 	assert(uni > -1);
+
+	mUniformMap[name] = uni;
+
 	return uni;
 }
 

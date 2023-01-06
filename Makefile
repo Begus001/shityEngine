@@ -6,7 +6,7 @@ OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
 CC := /usr/bin/g++
 LIBS := glfw3 glew
-CFLAGS := -O2 -Wall -Wextra -Wno-unused -Wno-unused-result -std=c++17 -pedantic -ggdb `pkg-config --cflags $(LIBS)`
+CFLAGS := -O2 -Wall -Wextra -Wno-unused -Wno-unused-result -std=c++20 -pedantic -ggdb `pkg-config --cflags $(LIBS)`
 LDFLAGS := `pkg-config --libs --static $(LIBS)`
 
 ELF := main

@@ -11,19 +11,16 @@
 
 bool apressed = false, dpressed = false, wpressed = false, spressed = false;
 
-float vertices[12] = {
-	-0.50f, -0.50f,
-	-0.25f,  0.00f,
-	 0.00f, -0.50f,
-	 0.25f,  0.00f,
-	 0.50f, -0.50f,
-	 0.00f,  0.50f,
+float vertices[] = {
+	-0.5, -0.5,
+	-0.5,  0.5,
+	 0.5,  0.5,
+	 0.5, -0.5,
 };
 
-unsigned int indices[9] = {
-	0, 1, 2,
-	2, 3, 4,
-	1, 5, 3,
+unsigned int indices[] = {
+	0, 1, 3,
+	1, 2, 3,
 };
 
 void fb_size_callback(GLFWwindow *window, int w, int h) { GLCALL(glViewport(0, 0, w, h)); }
@@ -109,8 +106,6 @@ int main(void)
 	se::Shader shader("src/vertexShader.glsl", "src/fragmentShader.glsl");
 	shader.compile();
 
-	int color = shader.getUniform("color");
-
 	float r = 1.0f, g = 0.0f, b = 0.0f;
 	unsigned int state = 0;
 
@@ -129,24 +124,24 @@ int main(void)
 			GLCALL(glClear(GL_COLOR_BUFFER_BIT));
 
 			if (apressed) {
-				for (int i = 0; i < 12; i += 2)
+				for (unsigned int i = 0; i < sizeof(vertices) / sizeof(float); i += 2)
 					vertices[i] -= 0.01f;
 			}
 			if (dpressed) {
-				for (int i = 0; i < 12; i += 2)
+				for (unsigned int i = 0; i < sizeof(vertices) / sizeof(float); i += 2)
 					vertices[i] += 0.01f;
 			}
 			if (wpressed) {
-				for (int i = 1; i < 12; i += 2)
+				for (unsigned int i = 1; i < sizeof(vertices) / sizeof(float); i += 2)
 					vertices[i] += 0.01f;
 			}
 			if (spressed) {
-				for (int i = 1; i < 12; i += 2)
+				for (unsigned int i = 1; i < sizeof(vertices) / sizeof(float); i += 2)
 					vertices[i] -= 0.01f;
 			}
 
-			GLCALL(glUniform4f(color, r, g, b, 1.0f));
-
+			shader.setUniform("color", r, g, b, 1.0f);
+			
 			vbo.bind();
 			vbo.setData(vertices, sizeof(vertices));
 
