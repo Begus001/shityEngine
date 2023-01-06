@@ -120,6 +120,7 @@ const char* Shader::load(const char *path) const
 	fseek(f, 0, SEEK_SET);
 
 	char *buf = (char *)malloc(len + 1);
+	memset(buf, 0, len + 1);
 	fread(buf, len, 1, f);
 
 	fclose(f);
