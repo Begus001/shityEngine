@@ -76,8 +76,11 @@ int main(void)
 	se::Shader shader("src/vertexShader.glsl", "src/fragmentShader.glsl");
 	shader.compile();
 
+	se::Renderer renderer;
+
 	vao.unbind();
 	vbo.unbind();
+	ebo.unbind();
 
 	const double interval = 1.0 / 60.0;
 	double startTime = glfwGetTime();
@@ -88,13 +91,15 @@ int main(void)
 
 			startTime = glfwGetTime();
 
-			GLCALL(glClear(GL_COLOR_BUFFER_BIT));
+			renderer.clear();
+
+			shader.setUniform<se::UT_1D>("test", glfwGetTime());
 			
 			vbo.bind();
 			vbo.setData(vertices, sizeof(vertices));
+
+			renderer.drawElem(vao, sizeof(indices) / sizeof(*indices));
 			
-			vao.bind();
-			GLCALL(glDrawElements(GL_TRIANGLES, sizeof(vertices), GL_UNSIGNED_INT, nullptr));
 			glfwSwapBuffers(win);
 			glfwPollEvents();
 		}

@@ -84,9 +84,33 @@ bool Shader::compile() const
 }
 
 template<>
-void Shader::setUniform<U4F>(const char *name, float f1, float f2, float f3, float f4)
+void Shader::setUniform<UT_1F>(const char *name, float f1)
+{
+	GLCALL(glUniform1f(getUniform(name), f1));
+}
+
+template<>
+void Shader::setUniform<UT_2F>(const char *name, float f1, float f2)
+{
+	GLCALL(glUniform2f(getUniform(name), f1, f2));
+}
+
+template<>
+void Shader::setUniform<UT_3F>(const char *name, float f1, float f2, float f3)
+{
+	GLCALL(glUniform3f(getUniform(name), f1, f2, f3));
+}
+
+template<>
+void Shader::setUniform<UT_4F>(const char *name, float f1, float f2, float f3, float f4)
 {
 	GLCALL(glUniform4f(getUniform(name), f1, f2, f3, f4));
+}
+
+template<>
+void Shader::setUniform<UT_1D>(const char *name, double d1)
+{
+	GLCALL(glUniform1d(getUniform(name), d1));
 }
 
 int Shader::getUniform(const char *name)
@@ -96,7 +120,7 @@ int Shader::getUniform(const char *name)
 	}
 
 	int uni;
-	GLCALL(uni = glGetUniformLocation(mProgID, "color"));
+	GLCALL(uni = glGetUniformLocation(mProgID, name));
 	assert(uni > -1);
 
 	mUniformMap[name] = uni;

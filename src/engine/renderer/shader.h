@@ -8,7 +8,7 @@ namespace se
 {
 
 enum UniformType {
-	U4F, U3F
+	UT_1F, UT_2F, UT_3F, UT_4F, UT_1D
 };
 
 class Shader {
@@ -21,8 +21,20 @@ public:
 
 	bool compile() const;
 
-	template<enum UniformType T = U4F>
+	template<UniformType T>
+	void setUniform(const char *name, float f1);
+
+	template<UniformType T>
+	void setUniform(const char *name, float f1, float f2);
+
+	template<UniformType T>
+	void setUniform(const char *name, float f1, float f2, float f3);
+
+	template<UniformType T>
 	void setUniform(const char *name, float f1, float f2, float f3, float f4);
+
+	template<UniformType T>
+	void setUniform(const char *name, double d1);
 
 	int getUniform(const char *name);
 
