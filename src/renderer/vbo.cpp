@@ -1,4 +1,4 @@
-#include "vbo.h"
+#include <renderer/vbo.h>
 
 namespace se
 {

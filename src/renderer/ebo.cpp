@@ -1,4 +1,4 @@
-#include "ebo.h"
+#include <renderer/ebo.h>
 
 namespace se
 {

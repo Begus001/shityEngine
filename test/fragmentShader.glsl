@@ -9,9 +9,9 @@ bool btoggle = false;
 
 void main()
 {
-	double r = mod(test / 2.13456, 1.0);
-	double g = mod(test / 2.54365, 1.0);
-	double b = mod(test / 2.23491, 1.0);
+	double r = mod(test / 3.13456, 1.0);
+	double g = mod(test / 3.54365, 1.0);
+	double b = mod(test / 3.23491, 1.0);
 
 	if (r >= 0.5) {
 		rtoggle = true;

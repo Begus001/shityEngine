@@ -7,7 +7,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "engine/renderer/renderer.h"
+#include <renderer/renderer.h>
 
 float vertices[] = {
 	-0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
@@ -73,7 +73,7 @@ int main(void)
 	layout.push<float>(3);
 	vao.addVBO(vbo, layout);
 
-	se::Shader shader("src/vertexShader.glsl", "src/fragmentShader.glsl");
+	se::Shader shader("vertexShader.glsl", "fragmentShader.glsl");
 	shader.compile();
 
 	se::Renderer renderer;
