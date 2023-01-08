@@ -6,7 +6,7 @@ namespace se
 VBO::VBO(const void *data, unsigned int size, BufferMode mode)
 {
 	GLCALL(glGenBuffers(1, &mID));
-	GLCALL(glBindBuffer(GL_ARRAY_BUFFER, mID));
+	bind();
 	setData(data, size, mode);
 }
 

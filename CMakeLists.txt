@@ -26,11 +26,5 @@ target_link_libraries(${TEST} PUBLIC ${ENGINE_LIB} glfw3 GLEW GL)
 target_compile_options(${TEST} PUBLIC ${ENGINE_CFLAGS})
 target_include_directories(${TEST} PUBLIC ${ENGINE_INCLUDE_DIR})
 
-add_custom_target(run_test ALL
-    COMMAND ./${TEST}
-    DEPENDS ${TEST}
-    WORKING_DIRECTORY ${PROJECT_BUILD_DIR}
-)
-
 configure_file(${PROJECT_SOURCE_DIR}/test/vertexShader.glsl ${PROJECT_BINARY_DIR}/vertexShader.glsl)
 configure_file(${PROJECT_SOURCE_DIR}/test/fragmentShader.glsl ${PROJECT_BINARY_DIR}/fragmentShader.glsl)
