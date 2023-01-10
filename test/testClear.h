@@ -5,7 +5,7 @@
 class TestClear : public Test {
 public:
 	TestClear();
-	~TestClear() override;
+	~TestClear();
 	
 	void onRender() override;
 	void onUIRender() override;

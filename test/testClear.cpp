@@ -1,9 +1,9 @@
 #include "testClear.h"
 
-TestClear::TestClear()
+TestClear::TestClear() : 
+mRenderer(new se::Renderer),
+mClearColor { 0.0f, 0.5f, 1.0f, 1.0f }
 {
-	mRenderer = new se::Renderer();
-	*mClearColor = {};
 }
 
 TestClear::~TestClear()

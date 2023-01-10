@@ -36,11 +36,13 @@ void Test::onUIRender()
 	ImGui::Begin("Tests");
 	ImGui::SetWindowFontScale(3.0f);
 	if (!mCurrentTest) {
-		for (unsigned long i = 0; i < mTests.size(); i++) {
-			if (ImGui::Button(mTests[i].first.c_str())) {
-				mCurrentTest = mTests[i].second();
+		for (auto &cur : mTests) {
+			if (ImGui::Button(cur.first.c_str())) {
+				mCurrentTest = cur.second();
 			}
 		}
+		if (ImGui::Button("Quit"))
+			exit(0);
 		goto end;
 	}
 

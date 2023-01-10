@@ -13,21 +13,19 @@ public:
 	virtual ~Test();
 
 	virtual void onStart() override;
-
 	virtual void onUpdate() override;
-
 	virtual void onRender() override;
-
 	virtual void onUIRender() override;
 
 	template <typename T>
 	void addTest(const std::string &name)
 	{
+		se::Log::d("Adding test: %s", name.c_str());
 		mTests.push_back(std::make_pair(name, []() { return new T(); }));
 	}
 
 private:
 	se::Renderer *mRenderer;
-	std::vector<std::pair<const std::string &, std::function<Test *()>>> mTests;
+	std::vector<std::pair<const std::string, std::function<Test *()>>> mTests;
 	Test *mCurrentTest = nullptr;
 };
