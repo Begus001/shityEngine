@@ -1,12 +1,13 @@
-#include "shityEngine.h"
-
-// #include <imgui/imgui.h>
-// #include <imgui/imgui_impl_glfw.h>
-// #include <imgui/imgui_impl_opengl3.h>
+#include <renderer/common.h>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glfw.h>
+#include <imgui/imgui_impl_opengl3.h>
+
+#include "shityEngine.h"
 
 namespace se
 {
@@ -20,43 +21,37 @@ void ShityApplication::run(std::string name)
 		exit(1);
 	}
 
-	GLFWwindow *win = glfwCreateWindow(1280, 720, name.c_str(), nullptr, nullptr);
+	Window win("Cock", 1920, 1080);
 
-	if (!win) {
-		fprintf(stderr, "GLFW window creation failed\n");
-		exit(1);
-	}
-
-	glfwMakeContextCurrent(win);
+	glfwMakeContextCurrent(win.getHandle());
 
 	glewInit();
 
-	printf("Run called\n");
-
-	// IMGUI_CHECKVERSION();
-    // ImGui::CreateContext();
-    // ImGuiIO &io = ImGui::GetIO();
-    // ImGui_ImplGlfw_InitForOpenGL(win, true);
-    // ImGui_ImplOpenGL3_Init("#version 450");
-    // ImGui::StyleColorsDark();
+	IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO();
+    ImGui_ImplGlfw_InitForOpenGL(win.getHandle(), true);
+    ImGui_ImplOpenGL3_Init("#version 450 core");
+    ImGui::StyleColorsDark();
 
 	onStart();
 	
-	while (!glfwWindowShouldClose(win)) {
+	while (!glfwWindowShouldClose(win.getHandle())) {
+		glfwPollEvents();
 		onUpdate();
+
+		ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
 
 		onRender();
 
-		// ImGui_ImplOpenGL3_NewFrame();
-        // ImGui_ImplGlfw_NewFrame();
-        // ImGui::NewFrame();
+		onUIRender();
 
-		// ImGui::Begin("Demo window");
-        // ImGui::Button("Hello!");
-        // ImGui::End();
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		glfwPollEvents();
-		glfwSwapBuffers(win);
+		glfwSwapBuffers(win.getHandle());
 	}
 }
 

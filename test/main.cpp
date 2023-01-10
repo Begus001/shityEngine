@@ -4,63 +4,61 @@
 #include <ctime>
 
 #include <shityEngine.h>
-#include <renderer/renderer.h>
+#include <logging/logging.h>
+#include <imgui/imgui.h>
 
-float vertices[] = {
-	-0.5f, -0.5f,
-	0.5f, -0.5f,
-	0.0f, 0.5f,
-};
+#include "test.h"
+#include "testClear.h"
 
-class App : public se::ShityApplication {
-public:
-	App()
-	{
-		run("Test");
-	}
+// float vertices[] = {
+// 	-0.5f, -0.5f,
+// 	0.5f, -0.5f,
+// 	0.0f, 0.5f,
+// };
 
-	~App()
-	{
-		delete renderer;
-		delete vao;
-		delete vbo;
-	}
 
-	void onStart() override
-	{
-		vao = new se::VAO;
+// class TestMultiColorTriangle : public Test {
+// public:
+// 	TestMultiColorTriangle()
+// 	{
+// 		run("Test");
+// 	}
+
+// 	~TestMultiColorTriangle() override
+// 	{
+// 		delete mRenderer;
+// 	}
+
+// 	void onStart() override
+// 	{
 		
-		vbo = new se::VBO(vertices, sizeof(vertices));
+// 	}
 
-		se::VBOLayout lay;
-		lay.push<float>(2);
+// 	void onUpdate() override
+// 	{
 
-		vao->addVBO(*vbo, lay);
+// 	}
 
-		se::Shader shader("vertexShader.glsl", "fragmentShader.glsl");
-		shader.compile();
+// 	void onRender() override
+// 	{
 
-		renderer = new se::Renderer;
-	}
+// 	}
 
-	void onUpdate() override
-	{
-	}
+// 	void onUIRender() override
+// 	{
 
-	void onRender() override
-	{
-		renderer->setClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		renderer->clear();
-		renderer->drawArray(*vao, 3);
-	}
+// 	}
 
-private:
-	se::Renderer *renderer;
-	se::VAO *vao;
-	se::VBO *vbo;
-};
+// private:
+// 	se::Renderer *mRenderer;
+// 	se::Shader *shader;
+// 	se::VAO *vao;
+// 	se::VBO *vbo;
+// };
 
 int main(void)
 {
-	App app;
+	Test test;
+	test.addTest<TestClear>("Clear test");
+	test.run("Test");
 }
