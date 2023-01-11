@@ -1,17 +1,8 @@
 #include "test.h"
 
-Test::Test()
-{
-	
-}
-
-Test::~Test()
-{
-}
-
 void Test::onStart()
 {
-	mRenderer = new se::Renderer;
+	mRenderer = std::make_unique<se::Renderer>();
 }
 
 void Test::onUpdate()

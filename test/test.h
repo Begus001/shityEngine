@@ -5,12 +5,12 @@
 #include <imgui/imgui.h>
 #include <vector>
 #include <functional>
+#include <memory>
 
 class Test : public se::ShityApplication {
 public:
-	Test();
-
-	virtual ~Test();
+	Test() {}
+	virtual ~Test() {}
 
 	virtual void onStart() override;
 	virtual void onUpdate() override;
@@ -25,7 +25,7 @@ public:
 	}
 
 private:
-	se::Renderer *mRenderer;
+	std::unique_ptr<se::Renderer> mRenderer;
 	std::vector<std::pair<const std::string, std::function<Test *()>>> mTests;
 	Test *mCurrentTest = nullptr;
 };

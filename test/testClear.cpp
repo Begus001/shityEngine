@@ -1,15 +1,8 @@
 #include "testClear.h"
 
 TestClear::TestClear() : 
-mRenderer(new se::Renderer),
-mClearColor { 0.0f, 0.5f, 1.0f, 1.0f }
-{
-}
-
-TestClear::~TestClear()
-{
-	delete mRenderer;
-}
+mRenderer(std::make_unique<se::Renderer>()),
+mClearColor { 0.0f, 0.5f, 1.0f, 1.0f } {}
 
 void TestClear::onRender()
 {
