@@ -113,6 +113,12 @@ void Shader::setUniform<UT_1D>(const char *name, double d1)
 	GLCALL(glUniform1d(getUniform(name), d1));
 }
 
+template<>
+void Shader::setUniform<UT_MAT4F>(const char *name, const glm::mat4 &mat)
+{
+	GLCALL(glUniformMatrix4fv(getUniform(name), 1, false, &mat[0][0]));
+}
+
 int Shader::getUniform(const char *name)
 {
 	if (mUniformMap.contains(name)) {

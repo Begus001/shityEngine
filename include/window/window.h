@@ -3,6 +3,9 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+
+#include <renderer/common.h>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 

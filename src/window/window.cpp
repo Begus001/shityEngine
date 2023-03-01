@@ -14,6 +14,9 @@ Window::Window(const std::string &name, int width, int height, bool vsync)
 	} else {
 		Log::d("Created window '%s' (%dx%d vsync=%d)", name.c_str(), width, height, vsync);
 	}
+
+	int left, top, right, bottom;
+	glfwGetWindowFrameSize(mHandle, &left, &top, &right, &bottom);
 }
 
 Window::~Window()

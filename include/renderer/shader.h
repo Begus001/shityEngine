@@ -4,11 +4,13 @@
 
 #include "common.h"
 
+#include <glm/glm.hpp>
+
 namespace se
 {
 
 enum UniformType {
-	UT_1F, UT_2F, UT_3F, UT_4F, UT_1D
+	UT_1F, UT_2F, UT_3F, UT_4F, UT_1D, UT_MAT4F
 };
 
 class Shader {
@@ -35,6 +37,9 @@ public:
 
 	template<UniformType T>
 	void setUniform(const char *name, double d1);
+
+	template<UniformType T>
+	void setUniform(const char *name, const glm::mat4 &mat);
 
 	int getUniform(const char *name);
 
